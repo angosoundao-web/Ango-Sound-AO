@@ -1,30 +1,38 @@
 
 import { supabase } from './supabase.js';
 
+// ELEMENTOS DA PÁGINA
 const form = document.getElementById('authForm');
 const loginButton = document.getElementById('loginButton');
 const message = document.getElementById('authMessage');
+const search = document.getElementById('search');
+const musicGrid = document.getElementById('musicGrid');
 
 let loginMode = false;
 
+// ALTERNAR ENTRE REGISTO E LOGIN
 loginButton.addEventListener('click', () => {
     loginMode = !loginMode;
 
     const nameField = document.getElementById('displayName');
     const typeField = document.getElementById('accountType');
+    const submitButton = form.querySelector('button[type="submit"]');
 
     nameField.style.display = loginMode ? 'none' : 'block';
     typeField.style.display = loginMode ? 'none' : 'block';
 
     nameField.required = !loginMode;
 
-    form.querySelector('button[type="submit"]').textContent =
-        loginMode ? 'Entrar' : 'Criar conta';
+    submitButton.textContent = loginMode ? 'Entrar' : 'Criar conta';
 
-    loginButton.textContent =
-        loginMode ? 'Criar nova conta' : 'Já tenho conta — Entrar';
+    loginButton.textContent = loginMode
+        ? 'Criar nova conta'
+        : 'Já tenho conta — Entrar';
+
+    message.textContent = '';
 });
 
+// REGISTO E AUTENTICAÇÃO
 form.addEventListener('submit', async (event) => {
     event.preventDefault();
 
@@ -67,3 +75,30 @@ form.addEventListener('submit', async (event) => {
         message.textContent = 'Erro: ' + error.message;
     }
 });
+
+// PESQUISA NO CONTEÚDO VISÍVEL
+search.addEventListener('input', () => {
+    const term = search.value.toLowerCase().trim();
+    const cards = musicGrid.children;
+
+    for (const card of cards) {
+        const matches = card.textContent.toLowerCase().includes(term);
+        card.style.display = matches ? '' : 'none';
+    }
+});
+
+// VERIFICAR SESSÃO EXISTENTE
+async function checkSession() {
+    const { data, error } = await supabase.auth.getSession();
+
+    if (error) {
+        console.error('Erro ao verificar sessão:', error.message);
+        return;
+    }
+
+    if (data.session) {
+        console.log('Utilizador autenticado:', data.session.user.email);
+    }
+}
+
+checkSession();
