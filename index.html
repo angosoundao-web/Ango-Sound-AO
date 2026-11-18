@@ -1,91 +1,44 @@
 
-<!DOCTYPE html>
-<html lang="pt">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="AngoSound - Descobre música angolana e africana.">
-    <title>AngoSound - Descobre a tua música</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+<section class="artist-section" id="contas">
+    <h2>Entra no AngoSound</h2>
+    <p>Cria a tua conta e começa a tua experiência musical.</p>
 
-<header>
-    <div class="logo">Ango<span>Sound</span></div>
+    <form id="authForm">
+        <input
+            type="text"
+            id="displayName"
+            placeholder="Nome completo"
+            required
+        >
 
-    <nav>
-        <a href="#inicio">Início</a>
-        <a href="#musicas">Explorar</a>
-        <a href="#artistas">Artistas</a>
-    </nav>
+        <input
+            type="email"
+            id="email"
+            placeholder="O teu email"
+            required
+        >
 
-    <div class="account">
-        <button class="login">Entrar</button>
-        <button class="register">Criar conta</button>
-    </div>
-</header>
+        <input
+            type="password"
+            id="password"
+            placeholder="Palavra-passe (mínimo 8 caracteres)"
+            minlength="8"
+            required
+        >
 
-<main>
-    <section class="hero" id="inicio">
-        <div class="hero-content">
-            <span class="tag">A MÚSICA AFRICANA TEM UMA CASA</span>
-            <h1>O teu som.<br>O teu mundo.</h1>
-            <p>Descobre novos artistas, explora músicas e vive os melhores ritmos de Angola e do mundo.</p>
-            <button class="explore-btn" onclick="document.getElementById('musicas').scrollIntoView()">Explorar músicas</button>
-        </div>
-    </section>
+        <select id="accountType">
+            <option value="listener">Sou ouvinte</option>
+            <option value="artist">Sou artista</option>
+        </select>
 
-    <section class="music-section" id="musicas">
-        <div class="section-heading">
-            <div>
-                <h2>Descobre músicas</h2>
-                <p>Encontra o som que combina contigo.</p>
-            </div>
-        </div>
+        <button type="submit" class="register">
+            Criar conta
+        </button>
 
-        <input type="search" id="search"
-        placeholder="Pesquisar músicas ou artistas...">
+        <button type="button" id="loginButton" class="login">
+            Já tenho conta — Entrar
+        </button>
 
-        <div class="music-grid" id="musicGrid">
-            <article class="music-card">
-                <div class="cover cover-one">🎵</div>
-                <h3>Em breve</h3>
-                <p>Novidades Angolanas</p>
-            </article>
-
-            <article class="music-card">
-                <div class="cover cover-two">🎧</div>
-                <h3>Em breve</h3>
-                <p>Afrobeat</p>
-            </article>
-
-            <article class="music-card">
-                <div class="cover cover-three">🎼</div>
-                <h3>Em breve</h3>
-                <p>Kizomba</p>
-            </article>
-
-            <article class="music-card">
-                <div class="cover cover-four">🌍</div>
-                <h3>Em breve</h3>
-                <p>Música Africana</p>
-            </article>
-        </div>
-    </section>
-
-    <section class="artist-section" id="artistas">
-        <h2>És artista?</h2>
-        <p>Partilha a tua música com o mundo. Cria o teu perfil e começa a construir a tua comunidade no AngoSound.</p>
-        <button class="register">Juntar-me como artista</button>
-    </section>
-</main>
-
-<footer>
-    <div class="logo">Ango<span>Sound</span></div>
-    <p>O som de Angola para o mundo.</p>
-    <p>© 2026 AngoSound. Todos os direitos reservados.</p>
-</footer>
-
-<script src="script.js"></script>
-</body>
-</html>
+        <p id="authMessage"></p>
+    </form>
+</section>
