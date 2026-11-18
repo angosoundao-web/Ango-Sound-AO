@@ -256,3 +256,27 @@ footer p {
         padding: 30px 20px;
     }
 }
+
+#authForm {
+    max-width: 420px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+#authForm input,
+#authForm select {
+    padding: 15px;
+    border-radius: 8px;
+    background: #22222b;
+    border: 1px solid #444;
+    color: white;
+    width: 100%;
+}
+
+#authMessage {
+    color: #ff7918;
+    overflow-wrap: anywhere;
+}
+
