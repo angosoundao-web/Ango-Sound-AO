@@ -551,3 +551,205 @@ footer p {
 ::-webkit-scrollbar-thumb:hover {
     background: var(--orange);
 }
+
+
+/* =================================
+   ANGOSOUND - MUSIC PLAYER FIXO
+================================= */
+
+.music-player {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    min-height: 95px;
+    padding: 12px 4%;
+    background: #111111;
+    border-top: 1px solid #333333;
+    display: grid;
+    grid-template-columns: 1fr 1.5fr 1fr;
+    align-items: center;
+    gap: 25px;
+    z-index: 999;
+    box-shadow: 0 -5px 25px rgba(0, 0, 0, 0.5);
+}
+
+/* INFORMAÇÕES DA MÚSICA */
+
+.player-track {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    min-width: 0;
+}
+
+.player-cover {
+    width: 58px;
+    height: 58px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #ff7918, #672600);
+    color: white;
+    font-size: 30px;
+}
+
+.track-info {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.track-info strong {
+    font-size: 14px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.track-info span {
+    color: #999999;
+    font-size: 12px;
+}
+
+/* CONTROLOS */
+
+.player-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+}
+
+.control-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 22px;
+}
+
+.control-buttons button {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 19px;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.control-buttons button:hover {
+    color: var(--orange);
+}
+
+#playPause {
+    width: 37px;
+    height: 37px;
+    border-radius: 50%;
+    background: var(--orange);
+    color: #111111;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#playPause:hover {
+    background: var(--orange-light);
+    color: #111111;
+}
+
+/* BARRA DE PROGRESSO */
+
+.progress-area {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.progress-area span {
+    color: #999999;
+    font-size: 11px;
+    min-width: 30px;
+}
+
+.progress-area input {
+    flex: 1;
+    accent-color: var(--orange);
+    cursor: pointer;
+    height: 4px;
+}
+
+/* VOLUME */
+
+.player-volume {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.player-volume span {
+    font-size: 17px;
+}
+
+.player-volume input {
+    width: 100px;
+    accent-color: var(--orange);
+    cursor: pointer;
+}
+
+/* ESPAÇO PARA O LEITOR FIXO */
+
+body {
+    padding-bottom: 115px;
+}
+
+/* VERSÃO PARA TELEMÓVEIS */
+
+@media (max-width: 650px) {
+    .music-player {
+        min-height: 85px;
+        padding: 10px 12px;
+        grid-template-columns: 1fr auto;
+        gap: 10px;
+    }
+
+    .player-cover {
+        width: 45px;
+        height: 45px;
+        font-size: 23px;
+    }
+
+    .track-info strong {
+        font-size: 12px;
+    }
+
+    .track-info span {
+        font-size: 10px;
+    }
+
+    .player-controls {
+        grid-column: 1 / -1;
+        grid-row: 2;
+    }
+
+    .player-volume {
+        display: none;
+    }
+
+    .control-buttons {
+        gap: 28px;
+    }
+
+    .progress-area {
+        gap: 7px;
+    }
+
+    body {
+        padding-bottom: 145px;
+    }
+}
