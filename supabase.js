@@ -8,11 +8,7 @@ const SUPABASE_URL =
 const SUPABASE_KEY =
 'sb_publishable_wUqNwSawrQ4xanui3yzHsg_NerrGoRA';
 
-const supabase = createClient(
+export const supabase = createClient(
     SUPABASE_URL,
     SUPABASE_KEY
 );
-
-window.supabaseClient = supabase;
-
-console.log('AngoSound ligado ao Supabase!');
