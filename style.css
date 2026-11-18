@@ -10,31 +10,41 @@ html {
 }
 
 body {
-    font-family: Arial, sans-serif;
     background: #09090d;
     color: #fff;
+    font-family: Arial, sans-serif;
 }
 
 header {
-    background: #111118;
-    padding: 22px 7%;
+    min-height: 80px;
+    padding: 15px 5%;
+    background: #111116;
+    border-bottom: 1px solid #25252d;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid #24242d;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
 }
 
 .logo {
+    font-size: 27px;
+    font-weight: 800;
     color: #ff7918;
-    font-size: 29px;
-    font-weight: bold;
-    letter-spacing: -1px;
+}
+
+.logo span {
+    color: white;
+}
+
+nav {
+    display: flex;
+    gap: 25px;
 }
 
 nav a {
-    color: #ccc;
+    color: #bbb;
     text-decoration: none;
-    margin-left: 25px;
     font-size: 14px;
 }
 
@@ -42,62 +52,207 @@ nav a:hover {
     color: #ff7918;
 }
 
+button {
+    cursor: pointer;
+    border: none;
+    font-weight: bold;
+}
+
+.login {
+    color: white;
+    background: transparent;
+    padding: 12px;
+}
+
+.register,
+.explore-btn {
+    background: #ff7918;
+    color: white;
+    padding: 13px 22px;
+    border-radius: 25px;
+}
+
+.register:hover,
+.explore-btn:hover {
+    background: #e96508;
+}
+
 .hero {
-    min-height: 470px;
-    padding: 120px 7%;
-    text-align: center;
-    background: linear-gradient(135deg, #19121e, #09090d 70%);
+    min-height: 440px;
+    padding: 100px 8%;
+    display: flex;
+    align-items: center;
+    background:
+        radial-gradient(ellipse at 80% 40%, #542b25 0%, transparent 45%),
+        linear-gradient(120deg, #21151c, #09090d 75%);
+}
+
+.hero-content {
+    max-width: 650px;
+}
+
+.tag {
+    color: #ff7918;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 2px;
 }
 
 .hero h1 {
-    font-size: clamp(38px, 6vw, 64px);
-    line-height: 1.15;
-    margin-bottom: 22px;
+    font-size: clamp(45px, 7vw, 76px);
+    line-height: 1.05;
+    margin: 25px 0;
 }
 
 .hero p {
-    color: #aaa;
-    font-size: 18px;
-    line-height: 1.6;
+    color: #bbb;
+    font-size: 17px;
+    line-height: 1.7;
+    max-width: 520px;
+    margin-bottom: 28px;
 }
 
-.hero button {
-    margin-top: 32px;
-    padding: 16px 38px;
-    background: #ff7918;
-    border: none;
+.music-section {
+    padding: 65px 7%;
+}
+
+.section-heading h2,
+.artist-section h2 {
+    font-size: 29px;
+    margin-bottom: 10px;
+}
+
+.section-heading p,
+.artist-section p {
+    color: #999;
+    line-height: 1.7;
+}
+
+#search {
+    width: 100%;
+    max-width: 550px;
+    margin: 30px 0;
+    padding: 16px 20px;
+    background: #191920;
+    border: 1px solid #33333c;
     border-radius: 30px;
     color: white;
-    font-weight: bold;
-    font-size: 16px;
-    cursor: pointer;
+    outline: none;
+}
+
+#search:focus {
+    border-color: #ff7918;
+}
+
+.music-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+}
+
+.music-card {
+    background: #15151c;
+    padding: 13px;
+    border-radius: 12px;
     transition: 0.3s;
 }
 
-.hero button:hover {
-    background: #e86608;
-    transform: scale(1.04);
+.music-card:hover {
+    background: #22222b;
+    transform: translateY(-5px);
+}
+
+.cover {
+    height: 180px;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 55px;
+    margin-bottom: 15px;
+}
+
+.cover-one {
+    background: linear-gradient(135deg, #743b29, #e77c32);
+}
+
+.cover-two {
+    background: linear-gradient(135deg, #172d48, #476c9d);
+}
+
+.cover-three {
+    background: linear-gradient(135deg, #3e234f, #985b9e);
+}
+
+.cover-four {
+    background: linear-gradient(135deg, #254a36, #6a9c58);
+}
+
+.music-card h3 {
+    font-size: 16px;
+    margin-bottom: 7px;
+}
+
+.music-card p {
+    color: #999;
+    font-size: 13px;
+}
+
+.artist-section {
+    margin: 30px 7% 70px;
+    padding: 55px;
+    background: #17171e;
+    border-radius: 15px;
+}
+
+.artist-section p {
+    max-width: 600px;
+    margin: 15px 0 25px;
 }
 
 footer {
-    text-align: center;
-    padding: 35px;
-    color: #777;
-    border-top: 1px solid #222;
+    padding: 40px 7%;
+    background: #111116;
+    border-top: 1px solid #25252d;
 }
 
-@media (max-width: 600px) {
+footer p {
+    color: #888;
+    margin-top: 12px;
+    font-size: 13px;
+}
+
+@media (max-width: 800px) {
+    .music-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 550px) {
     header {
-        padding: 20px;
-        flex-direction: column;
-        gap: 20px;
+        justify-content: center;
     }
 
-    nav a {
-        margin: 0 8px;
+    nav {
+        width: 100%;
+        justify-content: center;
+        gap: 18px;
     }
 
     .hero {
-        padding: 90px 20px;
+        padding: 75px 7%;
+    }
+
+    .music-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .cover {
+        height: 140px;
+    }
+
+    .artist-section {
+        padding: 30px 20px;
     }
 }
