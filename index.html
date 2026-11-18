@@ -1,45 +1,135 @@
 
-<section class="artist-section" id="contas">
-    <h2>Entra no AngoSound</h2>
-    <p>Cria a tua conta e começa a tua experiência musical.</p>
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#090909">
+    <meta name="description" content="AngoSound - Descobre música, artistas e novos sons de Angola e do mundo.">
+    <title>AngoSound - O teu som, o teu mundo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-    <form id="authForm">
-        <input
-            type="text"
-            id="displayName"
-            placeholder="Nome completo"
-            required
-        >
+    <header class="topbar">
+        <a href="#inicio" class="logo">Ango<span>Sound</span></a>
 
-        <input
-            type="email"
-            id="email"
-            placeholder="O teu email"
-            required
-        >
+        <nav class="main-nav">
+            <a href="#inicio">Início</a>
+            <a href="#explorar">Explorar</a>
+            <a href="#artistas">Artistas</a>
+            <a href="#biblioteca">Biblioteca</a>
+        </nav>
 
-        <input
-            type="password"
-            id="password"
-            placeholder="Palavra-passe (mínimo 8 caracteres)"
-            minlength="8"
-            required
-        >
+        <a href="#contas" class="header-button">Entrar</a>
+    </header>
 
-        <select id="accountType">
-            <option value="listener">Sou ouvinte</option>
-            <option value="artist">Sou artista</option>
-        </select>
+    <main>
 
-        <button type="submit" class="register">
-            Criar conta
-        </button>
+        <section class="hero" id="inicio">
+            <div class="hero-content">
+                <span class="eyebrow">A TUA PLATAFORMA MUSICAL</span>
+                <h1>O teu som.<br><span>O teu mundo.</span></h1>
+                <p>Descobre novas músicas, acompanha os teus artistas favoritos e vive a música sem limites.</p>
+                <a href="#explorar" class="primary-button">Explorar músicas</a>
+            </div>
+            <div class="hero-decoration">AS</div>
+        </section>
 
-        <button type="button" id="loginButton" class="login">
-            Já tenho conta — Entrar
-        </button>
+        <section class="music-section" id="explorar">
+            <div class="section-heading">
+                <div>
+                    <span class="eyebrow">DESCOBRE NOVOS SONS</span>
+                    <h2>Explorar músicas</h2>
+                </div>
+            </div>
 
-        <p id="authMessage"></p>
-    </form>
-</section>
-<script type="module" src="script.js"></script>
+            <input
+                type="search"
+                id="search"
+                placeholder="Pesquisar músicas ou artistas..."
+                aria-label="Pesquisar músicas ou artistas"
+            >
+
+            <div id="musicGrid" class="music-grid">
+                <div class="empty-state">
+                    <span>♫</span>
+                    <h3>As tuas músicas começam aqui</h3>
+                    <p>Em breve vais descobrir grandes sons no AngoSound.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="artist-section" id="artistas">
+            <div>
+                <span class="eyebrow">PARA QUEM CRIA MÚSICA</span>
+                <h2>A tua música merece ser ouvida.</h2>
+                <p>Cria a tua conta de artista e prepara-te para partilhar os teus sons com o mundo.</p>
+                <a href="#contas" class="primary-button">Juntar-me como artista</a>
+            </div>
+            <div class="artist-symbol">♫</div>
+        </section>
+
+        <section class="library-section" id="biblioteca">
+            <span class="eyebrow">A TUA EXPERIÊNCIA</span>
+            <h2>A tua biblioteca musical</h2>
+            <p>Entra na tua conta para começares a organizar a tua experiência musical.</p>
+            <a href="#contas" class="secondary-button">Aceder à minha conta</a>
+        </section>
+
+        <section class="auth-section" id="contas">
+            <div class="auth-intro">
+                <span class="eyebrow">BEM-VINDO AO ANGOSOUND</span>
+                <h2>A música aproxima-nos.</h2>
+                <p>Cria uma conta ou entra para continuares.</p>
+            </div>
+
+            <form id="authForm">
+                <input
+                    type="text"
+                    id="displayName"
+                    placeholder="Nome completo"
+                    required
+                >
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="O teu email"
+                    required
+                >
+
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Palavra-passe (mínimo 8 caracteres)"
+                    minlength="8"
+                    required
+                >
+
+                <select id="accountType">
+                    <option value="listener">Sou ouvinte</option>
+                    <option value="artist">Sou artista</option>
+                </select>
+
+                <button type="submit" class="primary-button">Criar conta</button>
+
+                <button type="button" id="loginButton" class="secondary-button">
+                    Já tenho conta — Entrar
+                </button>
+
+                <p id="authMessage" aria-live="polite"></p>
+            </form>
+        </section>
+
+    </main>
+
+    <footer>
+        <a href="#inicio" class="logo">Ango<span>Sound</span></a>
+        <p>O teu som. O teu mundo.</p>
+        <p>© 2026 AngoSound. Todos os direitos reservados.</p>
+    </footer>
+
+    <script type="module" src="script.js"></script>
+</body>
+</html>
