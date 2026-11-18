@@ -1,26 +1,67 @@
 
-document.addEventListener("DOMContentLoaded", () => {
+import { supabase } from './supabase.js';
 
-    const search = document.getElementById("search");
-    const musicCards = document.querySelectorAll(".music-card");
+const form = document.getElementById('authForm');
+const loginButton = document.getElementById('loginButton');
+const message = document.getElementById('authMessage');
 
-    // Pesquisa de músicas e artistas
-    if (search) {
-        search.addEventListener("input", () => {
-            const term = search.value
-                .toLowerCase()
-                .trim();
+let loginMode = false;
 
-            musicCards.forEach(card => {
-                const content = card.textContent.toLowerCase();
+loginButton.addEventListener('click', () => {
+    loginMode = !loginMode;
 
-                card.style.display =
-                    content.includes(term) ? "" : "none";
+    document.getElementById('displayName').style.display =
+        loginMode ? 'none' : 'block';
+
+    document.getElementById('accountType').style.display =
+        loginMode ? 'none' : 'block';
+
+    form.querySelector('button[type="submit"]').textContent =
+        loginMode ? 'Entrar' : 'Criar conta';
+
+    loginButton.textContent =
+        loginMode ? 'Criar nova conta' : 'Já tenho conta — Entrar';
+});
+
+form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value;
+    const name = document.getElementById('displayName').value.trim();
+    const accountType = document.getElementById('accountType').value;
+
+    message.textContent = 'A processar...';
+
+    try {
+        if (loginMode) {
+            const { error } = await supabase.auth.signInWithPassword({
+                email,
+                password
             });
-        });
+
+            if (error) throw error;
+
+            message.textContent = 'Sessão iniciada com sucesso!';
+        } else {
+            const { data, error } = await supabase.auth.signUp({
+                email,
+                password,
+                options: {
+                    data: {
+                        display_name: name,
+                        account_type: accountType
+                    }
+                }
+            });
+
+            if (error) throw error;
+
+            message.textContent = data.session
+                ? 'Conta criada com sucesso!'
+                : 'Conta criada! Verifica o teu email para confirmar o registo.';
+        }
+    } catch (error) {
+        message.textContent = 'Erro: ' + error.message;
     }
-
-    // Mensagem de boas-vindas
-    console.log("AngoSound carregado com sucesso!");
-
 });
