@@ -1,12 +1,26 @@
 
 document.addEventListener("DOMContentLoaded", () => {
-    console.log("AngoSound iniciado com sucesso!");
 
-    const button = document.querySelector("#explore");
+    const search = document.getElementById("search");
+    const musicCards = document.querySelectorAll(".music-card");
 
-    if (button) {
-        button.addEventListener("click", () => {
-            alert("Bem-vindo ao AngoSound! A música angolana está aqui.");
+    // Pesquisa de músicas e artistas
+    if (search) {
+        search.addEventListener("input", () => {
+            const term = search.value
+                .toLowerCase()
+                .trim();
+
+            musicCards.forEach(card => {
+                const content = card.textContent.toLowerCase();
+
+                card.style.display =
+                    content.includes(term) ? "" : "none";
+            });
         });
     }
+
+    // Mensagem de boas-vindas
+    console.log("AngoSound carregado com sucesso!");
+
 });
