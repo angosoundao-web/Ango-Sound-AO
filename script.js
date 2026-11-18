@@ -259,6 +259,171 @@ audioPlayer.addEventListener('ended', () => {
 
 // FUNÇÃO PARA ADICIONAR MÚSICAS À FILA
 window.addAngoSoundTrack = function(track) {
+    
+/* =====================================
+   ANGOSOUND - ENVIO DE MÚSICAS
+===================================== */
+
+const uploadForm = document.getElementById('uploadForm');
+const uploadMessage = document.getElementById('uploadMessage');
+const artistTracks = document.getElementById('artistTracks');
+
+if (uploadForm) {
+
+    uploadForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const title = document.getElementById('trackTitle').value.trim();
+        const description = document.getElementById('trackDescription').value.trim();
+        const audioFile = document.getElementById('audioFile').files[0];
+        const coverFile = document.getElementById('coverFile').files[0];
+
+        uploadMessage.textContent = 'A preparar o envio...';
+
+        try {
+            const { data: sessionData, error: sessionError } =
+                await supabase.auth.getSession();
+
+            if (sessionError) throw sessionError;
+
+            const user = sessionData.session?.user;
+
+            if (!user) {
+                throw new Error('Entra na tua conta antes de enviar músicas.');
+            }
+
+            const { data: profile, error: profileError } = await supabase
+                .from('profiles')
+                .select('account_type')
+                .eq('id', user.id)
+                .single();
+
+            if (profileError) throw profileError;
+
+            if (profile.account_type !== 'artist') {
+                throw new Error('Esta função está disponível apenas para artistas.');
+            }
+
+            if (!audioFile) {
+                throw new Error('Seleciona um ficheiro de áudio.');
+            }
+
+            const safeAudioName = audioFile.name.replace(/[^a-zA-Z0-9._-]/g, '_');
+            const audioPath = `${user.id}/${Date.now()}-${safeAudioName}`;
+
+            uploadMessage.textContent = 'A enviar áudio...';
+
+            const { error: audioError } = await supabase.storage
+                .from('music-files')
+                .upload(audioPath, audioFile);
+
+            if (audioError) throw audioError;
+
+            let coverUrl = null;
+
+            if (coverFile) {
+                const safeCoverName = coverFile.name.replace(/[^a-zA-Z0-9._-]/g, '_');
+                const coverPath = `${user.id}/${Date.now()}-${safeCoverName}`;
+
+                uploadMessage.textContent = 'A enviar capa...';
+
+                const { error: coverError } = await supabase.storage
+                    .from('album-covers')
+                    .upload(coverPath, coverFile);
+
+                if (coverError) throw coverError;
+
+                const { data: coverData } = supabase.storage
+                    .from('album-covers')
+                    .getPublicUrl(coverPath);
+
+                coverUrl = coverData.publicUrl;
+            }
+
+            uploadMessage.textContent = 'A guardar informações...';
+
+            const { error: databaseError } = await supabase
+                .from('tracks')
+                .insert({
+                    artist_id: user.id,
+                    title: title,
+                    description: description,
+                    audio_url: audioPath,
+                    cover_url: coverUrl,
+                    status: 'draft'
+                });
+
+            if (databaseError) throw databaseError;
+
+            uploadMessage.textContent =
+                'Música enviada com sucesso! Está guardada como rascunho.';
+
+            uploadForm.reset();
+
+            await loadArtistTracks();
+
+        } catch (error) {
+            uploadMessage.textContent = 'Erro: ' + error.message;
+        }
+    });
+}
+
+/* LISTAR MÚSICAS DO ARTISTA */
+
+async function loadArtistTracks() {
+
+    if (!artistTracks) return;
+
+    const { data: sessionData } = await supabase.auth.getSession();
+    const user = sessionData.session?.user;
+
+    if (!user) {
+        artistTracks.innerHTML = '<p>Entra na tua conta de artista para veres as tuas músicas.</p>';
+        return;
+    }
+
+    const { data: tracks, error } = await supabase
+        .from('tracks')
+        .select('title, status, created_at')
+        .eq('artist_id', user.id)
+        .order('created_at', { ascending: false });
+
+    if (error) {
+        artistTracks.textContent = 'Não foi possível carregar as músicas.';
+        console.error(error);
+        return;
+    }
+
+    if (!tracks || tracks.length === 0) {
+        artistTracks.innerHTML = '<p>Ainda não tens músicas enviadas.</p>';
+        return;
+    }
+
+    artistTracks.innerHTML = '';
+
+    tracks.forEach((track) => {
+        const item = document.createElement('div');
+        item.style.padding = '15px';
+        item.style.borderBottom = '1px solid #333';
+
+        const name = document.createElement('strong');
+        name.textContent = track.title;
+
+        const status = document.createElement('p');
+        status.textContent = track.status === 'published'
+            ? 'Publicada'
+            : 'Rascunho';
+
+        status.style.color = '#ff7918';
+        status.style.marginTop = '6px';
+
+        item.append(name, status);
+        artistTracks.appendChild(item);
+    });
+}
+
+loadArtistTracks();
+
     if (!track || !track.audioUrl || !track.title) {
         console.error('Dados da música incompletos.');
         return;
