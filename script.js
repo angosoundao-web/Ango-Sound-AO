@@ -10,11 +10,13 @@ let loginMode = false;
 loginButton.addEventListener('click', () => {
     loginMode = !loginMode;
 
-    document.getElementById('displayName').style.display =
-        loginMode ? 'none' : 'block';
+    const nameField = document.getElementById('displayName');
+    const typeField = document.getElementById('accountType');
 
-    document.getElementById('accountType').style.display =
-        loginMode ? 'none' : 'block';
+    nameField.style.display = loginMode ? 'none' : 'block';
+    typeField.style.display = loginMode ? 'none' : 'block';
+
+    nameField.required = !loginMode;
 
     form.querySelector('button[type="submit"]').textContent =
         loginMode ? 'Entrar' : 'Criar conta';
