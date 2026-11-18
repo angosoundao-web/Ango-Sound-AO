@@ -124,6 +124,39 @@
 
     </main>
 
+<!-- LEITOR DE MÚSICA ANGOSOUND -->
+<div class="music-player" id="musicPlayer">
+
+    <div class="player-track">
+        <div class="player-cover" id="playerCover">♫</div>
+        <div class="track-info">
+            <strong id="playerTitle">Nenhuma música selecionada</strong>
+            <span id="playerArtist">AngoSound</span>
+        </div>
+    </div>
+
+    <div class="player-controls">
+        <div class="control-buttons">
+            <button id="previousTrack" aria-label="Música anterior">|◀</button>
+            <button id="playPause" aria-label="Reproduzir ou pausar">▶</button>
+            <button id="nextTrack" aria-label="Próxima música">▶|</button>
+        </div>
+
+        <div class="progress-area">
+            <span id="currentTime">0:00</span>
+            <input type="range" id="progressBar" min="0" max="100" value="0">
+            <span id="duration">0:00</span>
+        </div>
+    </div>
+
+    <div class="player-volume">
+        <span>🔊</span>
+        <input type="range" id="volumeControl" min="0" max="1" step="0.01" value="0.8">
+    </div>
+
+    <audio id="audioPlayer"></audio>
+</div>
+
     <footer>
         <a href="#inicio" class="logo">Ango<span>Sound</span></a>
         <p>O teu som. O teu mundo.</p>
