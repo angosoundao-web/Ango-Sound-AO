@@ -552,75 +552,75 @@ footer p {
     background: var(--orange);
 }
 
-
-/* =================================
-   ANGOSOUND - MUSIC PLAYER FIXO
-================================= */
+/* =========================================
+   ANGOSOUND PREMIUM MUSIC PLAYER
+========================================= */
 
 .music-player {
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
-    min-height: 95px;
-    padding: 12px 4%;
-    background: #111111;
-    border-top: 1px solid #333333;
+    min-height: 100px;
+    padding: 14px 3%;
+    background: rgba(13, 13, 13, 0.98);
+    border-top: 1px solid #292929;
     display: grid;
-    grid-template-columns: 1fr 1.5fr 1fr;
+    grid-template-columns: 1fr 1.4fr 1fr;
     align-items: center;
-    gap: 25px;
-    z-index: 999;
-    box-shadow: 0 -5px 25px rgba(0, 0, 0, 0.5);
+    gap: 30px;
+    z-index: 9999;
+    box-shadow: 0 -8px 35px rgba(0,0,0,0.55);
+    backdrop-filter: blur(18px);
 }
-
-/* INFORMAÇÕES DA MÚSICA */
 
 .player-track {
     display: flex;
     align-items: center;
-    gap: 13px;
+    gap: 14px;
     min-width: 0;
 }
 
 .player-cover {
-    width: 58px;
-    height: 58px;
+    width: 65px;
+    height: 65px;
     flex-shrink: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 8px;
-    background: linear-gradient(135deg, #ff7918, #672600);
+    border-radius: 10px;
+    background: linear-gradient(135deg,#ff7918,#7d2600);
     color: white;
     font-size: 30px;
+    box-shadow: 0 4px 18px rgba(255,121,24,.2);
 }
 
 .track-info {
     display: flex;
     flex-direction: column;
+    gap: 6px;
     min-width: 0;
 }
 
 .track-info strong {
+    color: #fff;
     font-size: 14px;
+    font-weight: 700;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
 .track-info span {
-    color: #999999;
+    color: #999;
     font-size: 12px;
 }
-
-/* CONTROLOS */
 
 .player-controls {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
     width: 100%;
 }
 
@@ -628,94 +628,97 @@ footer p {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 22px;
+    gap: 28px;
 }
 
 .control-buttons button {
     background: transparent;
     border: none;
-    color: white;
+    color: #bdbdbd;
     font-size: 19px;
-    padding: 5px;
     cursor: pointer;
+    transition: .2s;
 }
 
 .control-buttons button:hover {
-    color: var(--orange);
+    color: #ff7918;
+    transform: scale(1.12);
 }
 
 #playPause {
-    width: 37px;
-    height: 37px;
+    width: 42px;
+    height: 42px;
     border-radius: 50%;
-    background: var(--orange);
-    color: #111111;
-    font-size: 16px;
+    background: #ff7918;
+    color: #111;
+    font-size: 17px;
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: .2s;
 }
 
 #playPause:hover {
-    background: var(--orange-light);
-    color: #111111;
+    background: #ff984d;
+    transform: scale(1.08);
 }
-
-/* BARRA DE PROGRESSO */
 
 .progress-area {
     width: 100%;
+    max-width: 520px;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
 }
 
 .progress-area span {
-    color: #999999;
+    color: #999;
     font-size: 11px;
-    min-width: 30px;
+    min-width: 32px;
+    font-variant-numeric: tabular-nums;
 }
 
 .progress-area input {
     flex: 1;
-    accent-color: var(--orange);
+    height: 5px;
+    accent-color: #ff7918;
     cursor: pointer;
-    height: 4px;
 }
-
-/* VOLUME */
 
 .player-volume {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    gap: 10px;
+    gap: 12px;
+    color: #aaa;
 }
 
 .player-volume span {
-    font-size: 17px;
+    font-size: 19px;
 }
 
 .player-volume input {
-    width: 100px;
-    accent-color: var(--orange);
+    width: 110px;
+    accent-color: #ff7918;
     cursor: pointer;
 }
 
-/* ESPAÇO PARA O LEITOR FIXO */
-
 body {
-    padding-bottom: 115px;
+    padding-bottom: 120px;
 }
 
-/* VERSÃO PARA TELEMÓVEIS */
+/* RESPONSIVO */
 
 @media (max-width: 650px) {
     .music-player {
-        min-height: 85px;
-        padding: 10px 12px;
-        grid-template-columns: 1fr auto;
-        gap: 10px;
+        min-height: 110px;
+        padding: 10px 14px;
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    .player-track {
+        justify-content: center;
     }
 
     .player-cover {
@@ -733,23 +736,28 @@ body {
     }
 
     .player-controls {
-        grid-column: 1 / -1;
-        grid-row: 2;
+        gap: 5px;
+    }
+
+    .control-buttons {
+        gap: 25px;
+    }
+
+    #playPause {
+        width: 34px;
+        height: 34px;
     }
 
     .player-volume {
         display: none;
     }
 
-    .control-buttons {
-        gap: 28px;
-    }
-
     .progress-area {
-        gap: 7px;
+        max-width: 100%;
     }
 
     body {
-        padding-bottom: 145px;
+        padding-bottom: 125px;
     }
 }
+
